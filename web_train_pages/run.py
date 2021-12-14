@@ -43,7 +43,7 @@ def show():
         network = unet(img_dir=None,drop=state.dropout, save_path=None, network_name="web_train", size=state.size, channels=state.channels, layers=layers, strides=strides, loss_function=loss_fn,spatial_transform=trans,intensity_transform=int_trans, jac=state.jac,web=True)
 
 
-        #state traing
+        #start traing:
 
         network.get_data(batch_size=4)
         x, losses, v_losses = network.train(epochs=epochs)
@@ -54,7 +54,7 @@ def show():
         },
         columns=['train loss', 'val loss']
     )
-        #plot losses
+        #plot losses:
         st.line_chart(df)
 
 """
