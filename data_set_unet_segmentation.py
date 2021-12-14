@@ -1,11 +1,11 @@
 import monai
 from pathlib import Path
-from monai.transforms.intensity.array import ScaleIntensity
+from monai.transforms.intensity.array import NormalizeIntensity, ScaleIntensity
 from monai.transforms.utility.array import AsChannelFirst
 
 import torch
 from monai.transforms import (Compose,    ToTensor,  LoadImage, AddChannel, EnsureType, )
-from torchvision.transforms.transforms import Resize
+from torchvision.transforms.transforms import Normalize, Resize
 import monai.visualize.img2tensorboard
 import monai.utils
 
@@ -85,7 +85,7 @@ class data_set_segmentation(monai.data.ImageDataset):
         fit_network_transform = Compose([
                                 ToTensor(),
                                 Resize((self.size, self.size)),
-                                ScaleIntensity(), 
+                                NormalizeIntensity(), 
                                 EnsureType(device=self.device),])
         image = fit_network_transform(image)     
        
