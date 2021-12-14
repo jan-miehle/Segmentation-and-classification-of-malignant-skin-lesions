@@ -8,7 +8,7 @@ from pathlib import Path
 
 """
 compares some metrics for a list of image files
-image_files_ list of files to meassure
+image_files: list of files to meassure
 plot_hist (bool): should the histrogram of the images be plottet?
 returns: pandas.dataframe with metric calues
 """
