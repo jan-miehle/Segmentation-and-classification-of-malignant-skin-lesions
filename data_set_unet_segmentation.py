@@ -12,7 +12,6 @@ import monai.utils
 """
 Dataset for segmenting images with pretrained u-net
 
-
 """
 class data_set_segmentation(monai.data.ImageDataset):
     """
