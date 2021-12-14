@@ -92,8 +92,8 @@ class data_set_u_net(monai.data.ImageDataset):
     image: augmented image
     gt: augmented gt
     image_file: file name
-    orig_image: image without augmentation
-    orig_gt: gt without augmentation
+    orig_image: image without augmentation (for test/validation set)
+    orig_gt: gt without augmentation (for test/validation set)
 
     """   
     def __getitem__(self, idx):
@@ -136,7 +136,7 @@ class data_set_u_net(monai.data.ImageDataset):
 
         #add mask channel to image for equal transforming both together
         image = torch.cat((image,gt), 0)
-    ################     spatial transforms
+        ################     spatial transforms
         if self.spatial_transform==None:
             self.spatial_transform =Compose([
                 RandFlip(prob = 0.5),            
@@ -161,7 +161,7 @@ class data_set_u_net(monai.data.ImageDataset):
 
        
 
-    ######## intensioty transforms:
+        ######## intensioty transforms:
         if self.intensity_transform== None:
             self.intensity_transform= Compose([
                 OneOf([
