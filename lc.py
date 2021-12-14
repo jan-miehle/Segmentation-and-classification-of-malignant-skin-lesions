@@ -45,8 +45,7 @@ def lc(imagePath):
     size = [numpyImage.shape[0], numpyImage.shape[1]]
     
     
-    ###strat lbp processing:
-    #save lbp for feature extraction!
+    ###start lbp processing:
     lbp, lbp2, l, y =lbpProcessing(numpyImage, size)
 
     ##Add the lbp processed image and luminance input //(+) - operation
@@ -59,8 +58,7 @@ def lc(imagePath):
     c = cluster(lab, size)
     mask = c.astype(bool)
   
-    print("runtime: " + str(  time.perf_counter() - startime) + " sec")
-    
+    print("runtime: " + str(  time.perf_counter() - startime) + " sec")    
     return lbp , lyl, lab, mask
 
 
