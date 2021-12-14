@@ -7,12 +7,12 @@ import os
 import tqdm
 
 """
-runs the Top Hat Transformation on the expected PH2-data-set folder
+runs the top hat transformation on the expected PH2-data-set folder
 small_elements (bool): which structuring element: True (5x5), False (7x7), None (diamond shape radius =3)
 gauss  (bool): use guass filter
 treshold  (bool):use thresholding
 dilation (bool):  use dilation and erosion
-save_path="ph2_": prefeix for generated save path
+save_path="ph2_": prefix for generated save path
 """
 def run_on_ph2(small_elements,gauss, treshold, dilation, save_path="ph2_"):
     save_path=save_path +"top_hat_v1/elemt="+str(small_elements)+"gauss_"+str(gauss)+"_treshold="+str(treshold)+"_dilation="+str(dilation)
@@ -37,7 +37,7 @@ small_elements (bool): which structuring element: True (5x5), False (7x7), None 
 gauss  (bool): use guass filter
 treshold  (bool):use thresholding
 dilation (bool):  use dilation and erosion
-save_path="ph2_": prefeix for generated save path
+save_path="ph2_": prefix for generated save path
 """
 def run(image_dir, small_elements,gauss, treshold, dilation,  save_path):
     save_path=save_path +"top_hat_v1/elemt="+str(small_elements)+"gauss_"+str(gauss)+" treshold="+str(treshold)+"_dilation="+str(dilation)
@@ -59,6 +59,7 @@ def run(image_dir, small_elements,gauss, treshold, dilation,  save_path):
 """
 calcualte pca for
 img: input image numpy.array
+returns image
 """
 def pca(img):
     #store image shape for reshaping
@@ -234,8 +235,4 @@ def inpaint(images, masks, names, save_path):
         mask_file = cv2.imwrite(os.path.join(mask_path , file_name),  numpy.array(mask).astype(int),  [cv2.IMWRITE_PNG_COMPRESSION, 0])
 
        
-run_on_ph2(False, True, True, True)
-#run_on_ph2(False, True, True, False)
-#run_on_ph2(False, False, True, True)
-#run_on_ph2(False, False, True, False)
 
