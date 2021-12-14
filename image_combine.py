@@ -53,4 +53,3 @@ def combine (source_1, source_2, out_path):
         #prints True if sucessfully write file
         print(test)
 
-#combine("ISIC/ISBI2016_ISIC_Part3B_Test_Data", "ISIC/test_set/lc/lbp", "ISIC/test_set/combined")
