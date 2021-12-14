@@ -25,7 +25,7 @@ from pathlib import Path
 Class for creating and traing the classifier network
 image_files :list of image files for training set
 test_files : list of image files for test set
-mask_files : list of mask files for traing set
+mask_files : list of mask files for training set
 test_mask_files  : list of mask files for test set
 label_csv : label file for training
 test_label_csv  : label file for testset
@@ -94,7 +94,7 @@ class classifier_network:
 
     """
     loads the data-sets. 
-    musst be called before training
+    must be called before training
     """
     def get_data(self, batch_size=4):
         self.batch_size = batch_size
@@ -117,8 +117,8 @@ class classifier_network:
 
     """
     start training
-    epochs: number of training epchs
-    search_treshhold=True : if true, a list of possible thresholds will be tested at each min. validation loss
+    epochs: number of training epochs
+    search_treshhold=True : if true, a list of possible thresholds will be tested at each minimum validation loss
     
     """
     def train(self, epochs=5, search_treshhold=True):
@@ -189,7 +189,7 @@ class classifier_network:
             # create empty confusion matrix:
             self.matrix_list= self.init_treshholeded_values()  #für opt. f-score
             self.first_run = True
-            # count poitiv examples in validation set:
+            # count positiv examples in validation set:
             positives_val = 0
             for batch_numer, (X, y, img_file) in enumerate(self.val_loader):
                 X = X.to(self.device) 
@@ -215,7 +215,7 @@ class classifier_network:
                 pred_discrete = post(pred)
                
 
-                #create one confusion amtrix for each element:
+                #create one confusion matrix for each element:
                 m = monai.metrics.get_confusion_matrix(pred_discrete, y)  
                 n = m[0]  
                 for i in range(1, len(X)):
@@ -383,7 +383,7 @@ class classifier_network:
             i = i +1
         self.first_run = False
     """
-    shows confusion matrix metrix for different thresholds
+    shows confusion matrix metrics for different thresholds
     
     """
     def show_treshholded_metrics(self):
@@ -463,7 +463,7 @@ class classifier_network:
         return name
 
     """
-    lots ecample images for image augmentation
+    plots example images for image augmentation
     img_save_path=None : If not none, plots will be saved to this path
     
     """
@@ -526,8 +526,6 @@ gt_dir="ISIC/train_gt" : standart folder for train gt
 test_gt_dir= 'ISIC/gt_test' : standart folder for test gt
 drop=0.0 dropout rate
 
-
-
 """
 def create_network_isic(size, name ,use_gt, use_noise=True, drop=0.0, network=None, weight=1, threshold=0.5, gt_dir="ISIC/train_gt", test_gt_dir= 'ISIC/gt_test'):
     image_dir = 'ISIC/ISBI2016_ISIC_Part3B_Training_Data'
@@ -567,7 +565,4 @@ def create_network_isic(size, name ,use_gt, use_noise=True, drop=0.0, network=No
 
 
 
-network = monai.networks.nets.DenseNet121(
-    spatial_dims=2, in_channels=3, out_channels=1, dropout_prob=0.2
 
-)
