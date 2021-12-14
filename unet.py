@@ -32,24 +32,26 @@ from data_set_unet_segmentation import data_set_segmentation as data_set_segment
 instance of unet network
 performes train and test loop
 
-
-img_dir=None : if none, ph2 dataset will be loaded
-gt_dir=None : if none, ph2 dataset will be loaded
-save_path ="saves",
-network_name="network", 
-size=128: image size
-channels=3: input channels
-drop=0.0 : dropout rate
-layers=( 64, 128, 256, 512, 1024): network lyers
-strides=(2,2,2,2): stride size
-jac=False: use jaccard index? 
-loss_function=None: If None, moai.losses.DiceCe is ued 
-spatial_transform=None (monai.transforms): for web interface 
-intensity_transform=None (monai.transforms): for web interface 
-web=False: for web interface 
-
 """
 class unet:
+    """
+    
+    img_dir=None : if none, ph2 dataset will be loaded
+    gt_dir=None : if none, ph2 dataset will be loaded
+    save_path ="saves",
+    network_name="network", 
+    size=128: image size
+    channels=3: input channels
+    drop=0.0 : dropout rate
+    layers=( 64, 128, 256, 512, 1024): network lyers
+    strides=(2,2,2,2): stride size
+    jac=False: use jaccard index? 
+    loss_function=None: If None, moai.losses.DiceCELoss is used 
+    spatial_transform=None (monai.transforms): for web interface 
+    intensity_transform=None (monai.transforms): for web interface 
+    web=False: toogle text-output for web interface 
+
+    """
     def __init__(self, img_dir=None,gt_dir=None,save_path ="saves",network_name="network", size=128, channels=3, drop=0.0, layers=( 64, 128, 256, 512, 1024), strides=(2,2,2,2), jac=False, loss_function=None, spatial_transform=None, intensity_transform=None, web=False):
         self.web=web
         self.intensity_transform = intensity_transform
@@ -120,7 +122,6 @@ class unet:
         for _, (X, y,  image_file, _, _) in enumerate(preview_loader):
             X = X.to("cpu")
             y = y.to("cpu")
-            #img_trans =Compose([ ToNumpy(), AsChannelLast(), ])
             if (self.channels ==1):
                 print("monochrome")
                 trans = Compose([
@@ -401,7 +402,7 @@ class unet:
         return name
 
     """
-    postprocessing fpr prediction
+    postprocessing for prediction
     by Monai.transorms
     Thresholding
     FillHoles
