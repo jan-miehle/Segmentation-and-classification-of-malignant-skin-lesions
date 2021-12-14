@@ -10,7 +10,7 @@ from monai.transforms import (Compose, AsChannelFirst,Resize,ScaleIntensity, Ran
 """
 Stores image data for test set for classifier network
 does no augmentation
-img_files: list if file names
+img_files: list of file names
 labels: .csv
 mask_files=None : list of file_names 
 size=512 :image size
