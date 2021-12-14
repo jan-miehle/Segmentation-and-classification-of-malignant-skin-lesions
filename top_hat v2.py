@@ -7,12 +7,12 @@ import tqdm
 import skimage.morphology
 
 """
-runs the Top Hat Transformation on the expected PH2-data-set folder
-small_elements (bool): which structuring element: True (5x5), False (7x7), None (diamond shape radius =3)
+runs the top hat transformation on the expected PH2-data-set folder
+small_elements (bool): which structuring element: True (5x5), False (7x7), None (diamond shape radius=3)
 gauss  (bool): use guass filter
 treshold  (bool):use thresholding
 dilation (bool):  use dilation and erosion
-save_path="ph2_": prefeix for generated save path
+save_path="ph2_": prefix for generated save path
 """
 def run_on_ph2(small_elements, gauss, treshold, dilation, save_path="ph2_"):
     save_path=save_path +"top_hat_v2/step3/small_elements="+str(small_elements)+"_gauss="+str(gauss)+"_treshold="+str(treshold)+"_dilation="+str(dilation)
@@ -32,12 +32,12 @@ def run_on_ph2(small_elements, gauss, treshold, dilation, save_path="ph2_"):
     inpaint(images, masks, names, save_path)
 
 """
-run Top-Hat Transform on specific image folder
+run top-hat transform on specific image folder
 small_elements (bool): which structuring element: True (5x5), False (7x7), None (diamond shape radius =3)
 gauss  (bool): use guass filter
 treshold  (bool):use thresholding
 dilation (bool):  use dilation and erosion
-save_path="ph2_": prefeix for generated save path
+save_path="ph2_": prefix for generated save path
 """
 def run(image_dir, small_elements, gauss, treshold, dilation, save_path):
     save_path=save_path +"/small_elements="+str(small_elements)+"_gauss="+str(gauss)+"_treshold="+str(treshold)+"_dilation="+str(dilation)
@@ -104,6 +104,7 @@ def tophat(images, small_elements, gauss, treshold, dilation):
             structurng_elements.append(f)
             f = skimage.morphology.diamond(5)
             structurng_elements.append(f)
+        ##########structuring elements version 2:      
         elif small_elements==False:
             #structuring elements version2
             
@@ -149,7 +150,7 @@ def tophat(images, small_elements, gauss, treshold, dilation):
             structurng_elements.append(f)
             f = skimage.morphology.diamond(7)
             structurng_elements.append(f)
-        ###singe structurering element:
+        ###single structurering element:
         else:
             f = skimage.morphology.diamond(5)
             structurng_elements.append(f) 
@@ -164,7 +165,7 @@ def tophat(images, small_elements, gauss, treshold, dilation):
             mask2 =  skimage.morphology.black_tophat(contrast_image, fp)
             n = n + mask
             m = m + mask2 
-        #combine mask:
+        #combine masks:
         mask = m +n
            
         #rescaling:
@@ -191,7 +192,7 @@ def tophat(images, small_elements, gauss, treshold, dilation):
 """
 inpaints images with masks
 images: list of images
-masks: list of maks
+masks: list of masks
 names: file name
 save_path: save inpainted image with failename here
 
