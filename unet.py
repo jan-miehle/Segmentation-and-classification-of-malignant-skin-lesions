@@ -363,7 +363,7 @@ class unet:
     def seg(self, image_dir, save_dir,size=512, channels=3):
         os.makedirs(save_dir, exist_ok=True)
         #load data:
-        data = data_set_segmentation(image_dir, additional_image_dir=None,sec_additional_image_dir=None, size=size, channels=channels,selection=None)
+        data = data_set_segmentation(image_dir, size=size, channels=channels,selection=None)
         loader = monai.data.DataLoader(data, batch_size=1, num_workers=0, shuffle=False)
         print(len(loader))
         self.net.eval()
