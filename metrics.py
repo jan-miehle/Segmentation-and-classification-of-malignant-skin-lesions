@@ -21,7 +21,7 @@ def compare_images(seg_file, gt_file):
         ]
     )
     #read and rescale images
-    #convert ot Tensor/ channel first image
+    #convert to Tensor/ channel first image
     seg = cv2.imread(seg_file, 0) /255
     seg = trans(seg) 
 
